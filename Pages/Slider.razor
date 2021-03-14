@@ -1,0 +1,39 @@
+<div class="slider-container">
+    <span>@MinimumValue</span>
+    <input type="range" @bind="DisplayValue" @bind:event="oninput" @onchange="SetValue" min="@MinimumValue"
+        max="@MaximumValue" class="slider" id="@Id">
+    <span>@MaximumValue</span>
+</div>
+
+<div>
+    Value: @DisplayValue
+</div>
+<div>
+    Actual Value: @Value
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public int MinimumValue { get; set; } = 0;
+
+    [Parameter]
+    public int MaximumValue { get; set; } = 100;
+
+    [Parameter]
+    public int DisplayValue { get; set; }
+
+    private int Value { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SetValue();
+    }
+
+    private void SetValue()
+    {
+        Value = DisplayValue;
+    }
+}
